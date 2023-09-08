@@ -1,15 +1,15 @@
 <h1 align="center">Monero Pool Search</h1>
 <div align="center">
   
-**[Pools that it supports](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#pools-that-it-currently-supports) • 
-[About](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#About) • 
-[Installing gems](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Installing-gems) • 
-[Installation](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Installation) • 
-[Build gem](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Build-gem) •
-[Help](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Help-Menu) •
-[Adding Pool](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Adding-Pool) •
-[Screenshots](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#screenshots) •
-[License](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#License)**
+**[Pools that it supports](https://github.com/Michael-Meade/Monero-Pool-Searcher#pools-currently-supported) • 
+[About](https://github.com/Michael-Meade/Monero-Pool-Searcher#about) • 
+[Installing gems](https://github.com/Michael-Meade/Monero-Pool-Searcher#installing-gems-manually) • 
+[Installation](https://github.com/Michael-Meade/Monero-Pool-Searcher#installating) • 
+[Build gem](https://github.com/Michael-Meade/Monero-Pool-Searcher#build-gem) •
+[Help](https://github.com/Michael-Meade/Monero-Pool-Searcher#help-menu) •
+[Adding Pool](https://github.com/Michael-Meade/Monero-Pool-Searcher#adding-pool) •
+[Screenshots](https://github.com/Michael-Meade/Monero-Pool-Searcher#screenshots) •
+[License](https://github.com/Michael-Meade/Monero-Pool-Searcher#license)**
 </div>
 
 
@@ -67,11 +67,11 @@ sudo apt install imagemagick
 Installing imagemagick. This is needed to create the graphs. 
 
 ```ruby
-sudo gem build xmrpoolsearch.gemspec
+gem build xmrpoolsearch.gemspec
 ```
 This will build the gem form scratch. You might need to delete the current versioned .gem file for the gem to be built. If you do not want to build the gem from scratch you can skip the build command and just use the install command below.  
 ```ruby
-sudo gem install xmrpoolsearch-0.1.0.gem
+gem install xmrpoolsearch-0.1.0.gem
 ```
 This will install the gem on your system. This is needed to use the code. If you do not want to install the gem you can use the `lib.rb` file. To use, put `require_relative 'lib'` on the first line of file and you can do the same stuff. 
 
