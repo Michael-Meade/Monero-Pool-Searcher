@@ -544,11 +544,45 @@ require 'nokogiri'
             end
         end
     end
+    class ZeroPool
+        def initialize(address, debug)
+            @address = address
+            @debug = debug
+        end
+        def address
+            @address
+        end
+        def url
+            "https://xmr.zeropool.io:8119/stats_address?address=#{address}"
+        end
+        def get
+            begin
+                rsp     = HTTParty.get(url).response.body
+                main    = JSON.parse(rsp)
+                results = {}
+                if main["status"] != false || main["error"] != "Account not found"
+                    results["balance"]             = main["data"]["balance"]
+                    results["paid"]                = main["data"]["paid"]
+                    results["hashrate"]            = main["data"]["hashrate"]
+                    results["total"]               = main["data"]["balance"].to_f + main["data"]["paid"].to_f
+                    results["name"]                = "xmr.zeropool.io"
+                end
+            return results if !results.empty?
+            rescue => e
+                puts e if @debug
+                results["balance"]  = 0.0
+                results["paid"]     = 0.0
+                results["total"]    = 0.0
+                results["hashrate"] = 0.0
+                results["name"]     = "zeropool.io"
+                return results
+            end
+        end
+    end
 end
 
-#https://api.c3pool.com/miner/43ZBkWEBNvSYQDsEMMCktSFHrQZTDwwyZfPp43FQknuy4UD3qhozWMtM4kKRyrr2Nk66JEiTypfvPbkFd5fGXbA1LxwhFZf/stats
 
-#https://monero.herominers.com/api/stats_address?address=43ZBkWEBNvSYQDsEMMCktSFHrQZTDwwyZfPp43FQknuy4UD3qhozWMtM4kKRyrr2Nk66JEiTypfvPbkFd5fGXbA1LxwhFZf&longpoll=false
+
 #"49ubSTdDp9hPmYE7paRM6PZFLmqvsedZ56MXLUT8mvYnTzjVCKGDbpuW4RVdvZon228uWnkjoJN8S6w5S4LdgeK8UBMMEhJ")
 #47vcMwEwosJRc4bCAcRRw7WwezTRn8dCHBjTnYXsZG3UR3Eya88PN3rZKexzwJojRMGVexryHmy47NXmNuDyZirWSexaEYv
 #4A3UaV5a2kZLd8dNBPDMA7BBhJGyCxcFVip3rJCgnhcciSzempVCwB4AZGf3KNWVeEihAGoF4ZYhhU6bePeEP3eh9ke26P7
