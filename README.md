@@ -173,6 +173,8 @@ Example of the --pt command, which will print the results in a table.
 The image above shows that the --pt and the --total command can be used together. The total will be printed under the table. 
 <br>
 
+# ToDo
+- [ ] clean up code
 
 # License
 

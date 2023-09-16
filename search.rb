@@ -47,20 +47,11 @@ o888o o888o o888o `Y8bod8P' o888o o888o `Y8bod8P' d888b    `Y8bod8P'      o888o 
 }
 
 
-banners = []
-banners << b1
-banners << b2
-banners << b3
-banners << b4
+banners = [b1,b2,b3,b4].each_with_index.to_a
 
-ban = banners.sample
-r   = rand(0..5)
-if r.even?
-    puts ban.to_s.green
-else
-    puts ban.to_s.red
-end
 
+ban, i = banners
+puts ban[0].red
 begin
     count = 0
     options = {}
