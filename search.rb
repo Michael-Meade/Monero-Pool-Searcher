@@ -52,63 +52,44 @@ banners = [b1,b2,b3,b4].each_with_index.to_a
 
 ban, i = banners
 puts ban[0].red
-begin
-    count = 0
-    options = {}
-    OptionParser.new do |parser|
-      parser.on("--addr [addr]", "input Monero address.") do |a|
-        options[:addr] = a
-      end
-      parser.on("--pt [PT]", "Print table") do |b|
-        options[:pt] = true
-      end
-      parser.on("--gruff [GRUFF]", "create bar graph.") do |b|
-        options[:gruff] = true
-      end
-      parser.on("--total", "Get total") do |b|
-        options[:total] = true
-      end
-      parser.on("--debug", "debug") do |d|
-        options[:debug] = true
-      end
-      parser.on("--pools", "pools") do |pp|
-        options[:pools] = true
-      end
-    end.parse!(into: options)
-rescue
-    puts "\nInvalid command. Use ruby search.rb --help\n\n\n".red if count > 0
-    count +=1
-end
+
+count = 0
+options = {}
+OptionParser.new do |parser|
+  parser.on("--addr [addr]", "input Monero address.") do |a|
+    options[:addr] = a
+  end
+  parser.on("--pt [PT]", "Print table") do |b|
+    options[:pt] = true
+  end
+  parser.on("--gruff [GRUFF]", "create bar graph.") do |b|
+    options[:gruff] = true
+  end
+  parser.on("--total", "Get total") do |b|
+    options[:total] = true
+  end
+  parser.on("--debug", "debug") do |d|
+    options[:debug] = true
+  end
+  parser.on("--pools", "pools") do |pp|
+    options[:pools] = true
+  end
+end.parse!(into: options)
+
 if options[:addr]
     if options[:pt]
-        if options[:debug]
-            Pools.print_table(options[:addr], options[:debug])
-        else
-            Pools.print_table(options[:addr], false)
-        end
+        Pools.print_table(options[:addr], options[:debug] || false)
     end
 end
 if options[:gruff]
-    if options[:debug]
-        Pools.gruff(options[:addr], options[:debug])
-    else
-        Pools.gruff(options[:addr], false)
-    end
+    Pools.gruff(options[:addr], options[:debug] || false)
 end
 if options[:total]
-    if options[:debug]
-        t = Pools::get_total(options[:addr], options[:debug])
-    else
-       t = Pools::get_total(options[:addr], false) 
-    end
+    t = Pools::get_total(options[:addr], options[:debug] || false)
     puts "Total: #{t}"
 end
 if options[:pools]
-    if options[:debug]
-        Pools::get_pools(options[:addr], options[:debug])
-    else
-        Pools::get_pools(options[:addr], false)
-    end
+    Pools::get_pools(options[:addr], options[:debug] || false)
 end
 if options.count <= 1
     puts "\nInvalid command. Use ruby search.rb --help\n\n\n".red
