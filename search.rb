@@ -74,7 +74,7 @@ begin
       parser.on("--pools", "pools") do |pp|
         options[:pools] = true
       end
-    end.parse!
+    end.parse!(into: options)
 rescue
     puts "\nInvalid command. Use ruby search.rb --help\n\n\n".red if count > 0
     count +=1
